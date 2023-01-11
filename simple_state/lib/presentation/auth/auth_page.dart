@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../business/application/auth_controller.dart';
-import '../../business/application/cart_controller.dart';
+import '../../business/application/auth_model.dart';
+import '../../business/application/cart_model.dart';
 import 'widgets/login_form.dart';
 import 'widgets/register_form.dart';
 
@@ -20,18 +20,16 @@ class _AuthPageState extends State<AuthPage> {
   String curPass = '';
   @override
   Widget build(BuildContext context) {
-    //final service=Provider.of<AppService>(context);
-    //print('service:$service');
-    final model = context.watch<AuthController>();
+    final model = context.watch<AuthModel>();
     final error = model.error;
-    final user=model.user;
-    if (user!=null){
+    final user = model.user;
+    if (user != null) {
       WidgetsBinding.instance.scheduleFrameCallback((timeStamp) {
-        context.read<CartController>().fetchCart();
-        Navigator.pop(context,true);
+        context.read<CartModel>().fetchCart();
+        Navigator.pop(context, true);
       });
     }
-    disabled=model.state!=AuthState.idle;
+    disabled = model.state != AuthState.idle;
     if (error != null) {
       WidgetsBinding.instance.scheduleFrameCallback((timeStamp) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -44,33 +42,35 @@ class _AuthPageState extends State<AuthPage> {
       });
     }
     return Scaffold(
-      appBar:AppBar(
+      appBar: AppBar(
         title: const Text('Вход'),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            curForm==0? LoginForm(
-              name: curName,
-              pass: curPass,
-              enabled: model.state == AuthState.idle,
-              onLogin: (name, pass) {
-                curName = name;
-                curPass = pass;
-                model.login(name, pass);
-                FocusManager.instance.primaryFocus?.unfocus();
-              },
-            ):RegisterForm(
-              name: curName,
-              pass: curPass,
-              enabled: model.state == AuthState.idle,
-              onRegister: (name, pass) {
-                curName = name;
-                curPass = pass;
-                model.register(name, pass);
-                FocusManager.instance.primaryFocus?.unfocus();
-              },
-            ),
+            curForm == 0
+                ? LoginForm(
+                    name: curName,
+                    pass: curPass,
+                    enabled: model.state == AuthState.idle,
+                    onLogin: (name, pass) {
+                      curName = name;
+                      curPass = pass;
+                      model.login(name, pass);
+                      FocusManager.instance.primaryFocus?.unfocus();
+                    },
+                  )
+                : RegisterForm(
+                    name: curName,
+                    pass: curPass,
+                    enabled: model.state == AuthState.idle,
+                    onRegister: (name, pass) {
+                      curName = name;
+                      curPass = pass;
+                      model.register(name, pass);
+                      FocusManager.instance.primaryFocus?.unfocus();
+                    },
+                  ),
             _bottomPart()
           ],
         ),
@@ -112,8 +112,8 @@ class _AuthPageState extends State<AuthPage> {
             onPressed: (curForm == 0)
                 ? () {
                     setState(() {
-                      curName='';
-                      curPass='';
+                      curName = '';
+                      curPass = '';
                       curForm = 1;
                     });
                   }
@@ -129,8 +129,8 @@ class _AuthPageState extends State<AuthPage> {
                   onPressed: (curForm == 1)
                       ? () {
                           setState(() {
-                            curName='';
-                            curPass='';
+                            curName = '';
+                            curPass = '';
                             curForm = 0;
                           });
                         }

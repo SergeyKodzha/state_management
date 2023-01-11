@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_state/presentation/store/widgets/cart_button_loading.dart';
+import 'package:simple_state/presentation/store/widgets/cart_preloader_box.dart';
+import 'package:simple_state/presentation/store/widgets/store_loading.dart';
 
-import '../../business/application/auth_controller.dart';
-import '../../business/application/cart_controller.dart';
+import '../../business/application/auth_model.dart';
+import '../../business/application/cart_model.dart';
 import '../../business/application/cart_products_loader.dart';
-import '../../business/application/store_controller.dart';
+import '../../business/application/store_model.dart';
 import '../../business/entities/cart_item.dart';
 import '../../business/entities/product.dart';
 import '../auth/auth_page.dart';
@@ -18,8 +21,7 @@ class StorePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final storeModel = context.watch<StoreController>();
-    //final productLoader=context.read<CartProductsLoader>();
+    final storeModel = context.watch<StoreModel>();
     final products = storeModel.products;
     return Scaffold(
         appBar: AppBar(
@@ -28,23 +30,15 @@ class StorePage extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Consumer<CartController>(
+                Consumer<CartModel>(
                   builder: (_, cartModel, __) {
                     final count = cartModel.cart?.items.length ?? 0;
                     return cartModel.isLoading
-                        ? const Padding(
-                            padding: EdgeInsets.only(right: 8),
-                            child: SizedBox(
-                                width: 32,
-                                height: 32,
-                                child: CircularProgressIndicator(
-                                  color: Colors.white,
-                                )),
-                          )
+                        ? const CartButtonLoading()
                         : CartButton(
                             superscript: count > 0 ? count.toString() : null,
                             onPressed: () {
-                              final cart = context.read<CartController>().cart;
+                              final cart = context.read<CartModel>().cart;
                               if (cart != null) {
                                 final List<ProductID> ids = [];
                                 for (final item in cart.items) {
@@ -60,7 +54,7 @@ class StorePage extends StatelessWidget {
                 ),
               ],
             ),
-            Consumer<AuthController>(
+            Consumer<AuthModel>(
               builder: (_, authModel, __) {
                 return authModel.user == null
                     ? IconButton(
@@ -75,9 +69,7 @@ class StorePage extends StatelessWidget {
           ],
         ),
         body: storeModel.isLoading
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
+            ? const StoreLoading()
             : IgnorePointer(
                 ignoring: context.read<CartProductsLoader>().isLoading,
                 child: Stack(
@@ -93,7 +85,7 @@ class StorePage extends StatelessWidget {
                           return StoreItem(
                             product: products[index],
                             onTap: (product) {
-                              final cart = context.read<CartController>().cart;
+                              final cart = context.read<CartModel>().cart;
                               if (cart != null) {
                                 CartItem item = CartItem(product.id, 0);
                                 for (final i in cart.items) {
@@ -122,12 +114,12 @@ class StorePage extends StatelessWidget {
                     Consumer<CartProductsLoader>(
                       builder: (context, loader, child) {
                         if (loader.isLoading) {
-                          return Center(child: _preloaderBox());
+                          return const CartPreloaderBox();
                         } else {
                           if (loader.hasData) {
                             WidgetsBinding.instance
                                 .scheduleFrameCallback((timeStamp) {
-                              _navigateToCartPage(context,loader.products);
+                              _navigateToCartPage(context, loader.products);
                               loader.consumeData();
                             });
                           }
@@ -138,29 +130,6 @@ class StorePage extends StatelessWidget {
                   ],
                 ),
               ));
-  }
-
-  Widget _preloaderBox() {
-    return Container(
-      color: Colors.black.withOpacity(0.1),
-      child: Container(
-          //width: 64,
-          //height: 64,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withOpacity(0.3),
-                    spreadRadius: 2,
-                    blurRadius: 2,
-                    offset: const Offset(0, 2))
-              ],
-              borderRadius: BorderRadius.circular(8)),
-          child: const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: CircularProgressIndicator(),
-          )),
-    );
   }
 
   void _navigateToAuthPage(BuildContext context) {
@@ -180,7 +149,8 @@ class StorePage extends StatelessWidget {
         ));
   }
 
-  void _navigateToCartPage(BuildContext context,Map<ProductID,Product> products) {
+  void _navigateToCartPage(
+      BuildContext context, Map<ProductID, Product> products) {
     Navigator.push(
         context,
         MaterialPageRoute(

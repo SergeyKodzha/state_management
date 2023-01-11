@@ -1,4 +1,3 @@
-
 import 'cart.dart';
 import 'cart_item.dart';
 import 'product.dart';
@@ -12,12 +11,12 @@ extension MutableCart on Cart {
 
   Cart setItem(CartItem to) {
     final List<CartItem> itemsCopy = List.from(items);
-    final index = itemsCopy.indexWhere((item) =>
-    item.productId == to.productId);
+    final index =
+        itemsCopy.indexWhere((item) => item.productId == to.productId);
     if (index >= 0) {
       print('item updated ${to.quantity}');
       itemsCopy[index] = to;
-    } else{
+    } else {
       print('new item added');
       itemsCopy.add(to);
     }
@@ -26,7 +25,7 @@ extension MutableCart on Cart {
 
   Cart removeItemById(ProductID productId) {
     final List<CartItem> copy = List.from(items);
-    copy.removeWhere((item) => item.productId==productId);
+    copy.removeWhere((item) => item.productId == productId);
     return Cart(copy);
   }
 }
