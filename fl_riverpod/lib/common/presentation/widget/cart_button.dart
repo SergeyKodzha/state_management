@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class CartButton extends StatelessWidget {
   final String? superscript;
   final VoidCallback onPressed;
+
   const CartButton({Key? key, this.superscript, required this.onPressed})
       : super(key: key);
 

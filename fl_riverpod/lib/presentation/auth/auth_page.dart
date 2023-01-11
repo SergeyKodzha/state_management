@@ -18,6 +18,7 @@ class _AuthPageState extends ConsumerState<AuthPage> {
   bool disabled = false;
   String curName = '';
   String curPass = '';
+
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authStateProvider);
@@ -43,8 +44,8 @@ class _AuthPageState extends ConsumerState<AuthPage> {
     });
 
     ref.listen(authUserProvider, (previous, user) {
-      if (user!=null){
-        Navigator.pop(context,true);
+      if (user != null) {
+        Navigator.pop(context, true);
       }
     });
 
@@ -69,7 +70,6 @@ class _AuthPageState extends ConsumerState<AuthPage> {
                         ref
                             .read(authStateProvider.notifier)
                             .register(name, pass);
-                        //disabled = true;
                       });
                     },
                   )
@@ -83,7 +83,6 @@ class _AuthPageState extends ConsumerState<AuthPage> {
                         curName = name;
                         curPass = pass;
                         ref.read(authStateProvider.notifier).login(name, pass);
-                        //disabled = true;
                       });
                     },
                   ),

@@ -1,9 +1,9 @@
+import 'package:fl_riverpod/presentation/store/widget/store_list.dart';
+import 'package:fl_riverpod/presentation/store/widget/store_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-
-
 import '../../common/presentation/widget/cart_button.dart';
+import '../../common/presentation/widget/cart_button_loading.dart';
 import '../../domain/entities/cart_item.dart';
 import '../../domain/entities/product.dart';
 import '../auth/auth_page.dart';
@@ -12,7 +12,6 @@ import '../cart/cart_page.dart';
 import '../cart/provider/cart_provider.dart';
 import '../details/details_page.dart';
 import 'provider/store_provider.dart';
-import 'widget/store_item.dart';
 
 class StorePage extends ConsumerStatefulWidget {
   const StorePage({Key? key}) : super(key: key);
@@ -22,7 +21,6 @@ class StorePage extends ConsumerStatefulWidget {
 }
 
 class StoreState extends ConsumerState<StorePage> {
-
   @override
   Widget build(BuildContext context) {
     final user = ref.watch(authUserProvider);
@@ -38,15 +36,7 @@ class StoreState extends ConsumerState<StorePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               isCartLoading
-                  ? const Padding(
-                    padding: EdgeInsets.only(right: 8),
-                    child: SizedBox(
-                        height: 16,
-                        width: 16,
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                        )),
-                  )
+                  ? const CartButtonLoading()
                   : CartButton(
                       superscript: isCartLoading
                           ? null
@@ -59,38 +49,29 @@ class StoreState extends ConsumerState<StorePage> {
           ),
           user == null
               ? IconButton(
-              onPressed: () {
-                _navigateToAuthPage();
-              },
-              icon: const Icon(Icons.person))
-              : const Center(child: Text('войдено')),
+                  onPressed: () {
+                    _navigateToAuthPage();
+                  },
+                  icon: const Icon(Icons.person))
+              : const Padding(
+                  padding: EdgeInsets.only(right: 8.0),
+                  child: Icon(Icons.person),
+                ),
         ],
       ),
       body: listingState.isLoading == true || cart == null
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : GridView.builder(
-              itemCount: products.length,
-              //shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 40 / 57,
-              ),
-              itemBuilder: (context, index) {
-                return StoreItem(
-                  product: products[index],
-                  onTap: (product) {
-                    CartItem item = CartItem(product.id, 0);
-                    for (final i in cart.items) {
-                      if (i.productId == product.id) {
-                        item = i;
-                        break;
-                      }
-                    }
-                    _navigateToDetailsPage(product, item);
-                  },
-                );
+          ? const StoreLoading()
+          : StoreList(
+              products: listingState.value ?? [],
+              onTap: (product) {
+                CartItem item = CartItem(product.id, 0);
+                for (final i in cart.items) {
+                  if (i.productId == product.id) {
+                    item = i;
+                    break;
+                  }
+                }
+                _navigateToDetailsPage(product, item);
               },
             ),
     );
@@ -102,20 +83,15 @@ class StoreState extends ConsumerState<StorePage> {
         MaterialPageRoute(
           builder: (context) => DetailsPage(item: item, product: product),
         ));
-    /*
-    if (res == true) {
-      ref.invalidate(cartProvider);
-    }
-     */
   }
 
   Future<void> _navigateToAuthPage() async {
-    final success=await Navigator.push(
+    final success = await Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => const AuthPage(),
         ));
-    if (success){
+    if (success) {
       ref.read(cartProvider.notifier).fetch();
     }
   }

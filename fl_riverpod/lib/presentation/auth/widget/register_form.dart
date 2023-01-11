@@ -7,17 +7,18 @@ class RegisterForm extends StatelessWidget {
   final TextEditingController _passController = TextEditingController();
   final TextEditingController _passConfirmController = TextEditingController();
   final void Function(String, String) onRegister;
+
   RegisterForm(
       {Key? key,
-        this.enabled = true,
-        required this.onRegister,
-        String? name,
-        String? pass})
+      this.enabled = true,
+      required this.onRegister,
+      String? name,
+      String? pass})
       : super(key: key) {
     _nameController.text = name ?? '';
     _passController.text = pass ?? '';
     _passConfirmController.text = pass ?? '';
-    btnEnabled.value=_isEnabled();
+    btnEnabled.value = _isEnabled();
   }
 
   @override
@@ -44,7 +45,6 @@ class RegisterForm extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
-                  //mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     TextFormField(
                       controller: _nameController,
@@ -81,14 +81,14 @@ class RegisterForm extends StatelessWidget {
                     ValueListenableBuilder<bool>(
                         valueListenable: btnEnabled,
                         builder: (context, enabled, child) => ElevatedButton(
-                          onPressed: (enabled && this.enabled)
-                              ? () {
-                            onRegister(_nameController.text,
-                                _passController.text);
-                          }
-                              : null,
-                          child: const Text("Дальше"),
-                        )),
+                              onPressed: (enabled && this.enabled)
+                                  ? () {
+                                      onRegister(_nameController.text,
+                                          _passController.text);
+                                    }
+                                  : null,
+                              child: const Text("Дальше"),
+                            )),
                   ],
                 ),
               )),
@@ -101,7 +101,9 @@ class RegisterForm extends StatelessWidget {
     final text1 = _nameController.text;
     final text2 = _passController.text;
     final text3 = _passConfirmController.text;
-    if ((text1.isEmpty || text2.isEmpty || text3.isEmpty) || text2 != text3 || !enabled) {
+    if ((text1.isEmpty || text2.isEmpty || text3.isEmpty) ||
+        text2 != text3 ||
+        !enabled) {
       return false;
     }
     return true;

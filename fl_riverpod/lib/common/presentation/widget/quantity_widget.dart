@@ -5,12 +5,19 @@ class QuantityWidget extends StatelessWidget {
   final void Function(int)? onChanged;
   final bool enabled;
   final int available;
-  const QuantityWidget({Key? key, required this.quantity, this.onChanged,this.enabled=true,required this.available}) : super(key: key);
+
+  const QuantityWidget(
+      {Key? key,
+      required this.quantity,
+      this.onChanged,
+      this.enabled = true,
+      required this.available})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    bool plusEnabled=quantity<available;
-    bool minusEnabled=quantity>0;
+    bool plusEnabled = quantity < available;
+    bool minusEnabled = quantity > 0;
     return SizedBox(
       height: 40,
       child: Container(
@@ -21,13 +28,25 @@ class QuantityWidget extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(20))),
         child: Row(
           children: [
-            plusEnabled?
-            IconButton(onPressed: !enabled? null:() {onChanged?.call(quantity+1);}, icon: const Icon(Icons.add)):
-            const IconButton(onPressed: null, icon: Icon(Icons.add)),
+            minusEnabled
+                ? IconButton(
+                    onPressed: !enabled
+                        ? null
+                        : () {
+                            onChanged?.call(quantity - 1);
+                          },
+                    icon: const Icon(Icons.remove))
+                : const IconButton(onPressed: null, icon: Icon(Icons.remove)),
             Text(quantity.toString()),
-            minusEnabled?
-            IconButton(onPressed: !enabled? null:() {onChanged?.call(quantity-1);}, icon: const Icon(Icons.remove)):
-            const IconButton(onPressed: null, icon: Icon(Icons.remove)),
+            plusEnabled
+                ? IconButton(
+                    onPressed: !enabled
+                        ? null
+                        : () {
+                            onChanged?.call(quantity + 1);
+                          },
+                    icon: const Icon(Icons.add))
+                : const IconButton(onPressed: null, icon: Icon(Icons.add)),
           ],
         ),
       ),

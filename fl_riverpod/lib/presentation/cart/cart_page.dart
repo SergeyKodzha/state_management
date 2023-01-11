@@ -2,7 +2,6 @@ import 'package:fl_riverpod/presentation/cart/provider/remove_cart_item_provider
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 import '../../domain/entities/cart_item.dart';
 import '../../domain/entities/product.dart';
 import '../auth/auth_page.dart';
@@ -43,7 +42,10 @@ class CartPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Корзина')),
       body: (order != null)
-          ? OrderPage(order: order,ref: ref,)
+          ? OrderPage(
+              order: order,
+              ref: ref,
+            )
           : (cart == null || products == null || isOrderLoading || isOrdering)
               ? const Center(
                   child: CircularProgressIndicator(),
@@ -63,9 +65,15 @@ class CartPage extends ConsumerWidget {
                               onQuantityChanged: (newVal) {
                                 final newItem =
                                     CartItem(item.productId, newVal);
-                                ref
-                                    .read(setCartItemProvider.notifier)
-                                    .setCartItem(newItem);
+                                if (newVal != 0) {
+                                  ref
+                                      .read(setCartItemProvider.notifier)
+                                      .setCartItem(newItem);
+                                } else {
+                                  ref
+                                      .read(removeCartItemProvider.notifier)
+                                      .removeCartItem(item.productId);
+                                }
                               },
                               onRemove: () {
                                 ref
@@ -94,9 +102,7 @@ class CartPage extends ConsumerWidget {
                                   if (user == null) {
                                     _navigateToAuthPage(context, ref);
                                   } else {
-                                    //ref.invalidate(cartProvider);
-                                    ref
-                                        .read(orderProvider.notifier).order();
+                                    ref.read(orderProvider.notifier).order();
                                   }
                                 },
                                 totalPrice: '$price руб');

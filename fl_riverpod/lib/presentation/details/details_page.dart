@@ -11,6 +11,7 @@ import '../cart/provider/set_cart_item_provider.dart';
 class DetailsPage extends ConsumerStatefulWidget {
   CartItem item;
   final Product product;
+
   DetailsPage({Key? key, required this.item, required this.product})
       : super(key: key);
 
@@ -19,7 +20,6 @@ class DetailsPage extends ConsumerStatefulWidget {
 }
 
 class _DetailsPageState extends ConsumerState<DetailsPage> {
-  //bool needParentUpdate=false;
   @override
   Widget build(BuildContext context) {
     ref.watch(cartProvider);
@@ -97,7 +97,6 @@ class _DetailsPageState extends ConsumerState<DetailsPage> {
                       height: 16,
                     ),
                     Row(
-                      //mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         const Text(

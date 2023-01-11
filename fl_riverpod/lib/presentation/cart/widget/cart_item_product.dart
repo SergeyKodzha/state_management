@@ -10,6 +10,7 @@ class CartItemProduct extends StatelessWidget {
   final bool enabled;
   final void Function(int)? onQuantityChanged;
   final VoidCallback? onRemove;
+
   const CartItemProduct(
       {Key? key,
       required this.product,
@@ -31,7 +32,6 @@ class CartItemProduct extends StatelessWidget {
               'assets/images/${product.image}',
               fit: BoxFit.fitHeight,
             )),
-        //SizedBox(width: 16,),
         Expanded(
           flex: 2,
           child: Padding(

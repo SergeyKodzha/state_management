@@ -14,12 +14,14 @@ class Order {
       required this.created,
       required this.deliveryIn,
       required this.cost});
+
   Order.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         ownerId = json['ownerId'],
         created = json['created'],
         deliveryIn = json['deliveryIn'],
         cost = json['cost'];
+
   Map<String, dynamic> toJson() => {
         'id': id,
         'ownerId': ownerId,

@@ -6,16 +6,17 @@ class LoginForm extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
   final void Function(String, String) onLogin;
+
   LoginForm(
       {Key? key,
-        this.enabled = true,
-        required this.onLogin,
-        String? name,
-        String? pass})
+      this.enabled = true,
+      required this.onLogin,
+      String? name,
+      String? pass})
       : super(key: key) {
     _nameController.text = name ?? '';
     _passController.text = pass ?? '';
-    btnEnabled.value=_isEnabled();
+    btnEnabled.value = _isEnabled();
   }
 
   @override
@@ -71,15 +72,14 @@ class LoginForm extends StatelessWidget {
                     ValueListenableBuilder<bool>(
                         valueListenable: btnEnabled,
                         builder: (context, enabled, child) => ElevatedButton(
-                          onPressed: (enabled && this.enabled)
-                              ? () {
-                            onLogin(_nameController.text,
-                                _passController.text);
-                          }
-                              : null,
-                          //onPressed: !enabled ? null : () {},
-                          child: const Text("Дальше"),
-                        )),
+                              onPressed: (enabled && this.enabled)
+                                  ? () {
+                                      onLogin(_nameController.text,
+                                          _passController.text);
+                                    }
+                                  : null,
+                              child: const Text("Дальше"),
+                            )),
                   ],
                 ),
               )),

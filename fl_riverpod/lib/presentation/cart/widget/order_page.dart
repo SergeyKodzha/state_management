@@ -7,7 +7,9 @@ import '../provider/order_provider.dart';
 class OrderPage extends StatelessWidget {
   final Order order;
   final WidgetRef ref;
-  const OrderPage({required this.order,Key? key, required this.ref}) : super(key: key);
+
+  const OrderPage({required this.order, Key? key, required this.ref})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,53 +21,80 @@ class OrderPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Text('Ваш заказ в пути!',style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold),),
+              Text(
+                'Ваш заказ в пути!',
+                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+              ),
             ],
           ),
-          const SizedBox(height: 16,),
-          Row(mainAxisSize:MainAxisSize.max,
+          const SizedBox(
+            height: 16,
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
             children: [
               const Text('Айди заказа: '),
               Text(order.id),
-            ],),
-          const SizedBox(height: 8,),
-          Row(mainAxisSize:MainAxisSize.max,
-          children: [
-            const Text('Создан: '),
-            Text(DateTime.fromMillisecondsSinceEpoch(order.created).toString()),
-          ],),
-          const SizedBox(height: 8,),
+            ],
+          ),
+          const SizedBox(
+            height: 8,
+          ),
           Row(
-            mainAxisSize:MainAxisSize.max,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              const Text('Создан: '),
+              Text(DateTime.fromMillisecondsSinceEpoch(order.created)
+                  .toString()),
+            ],
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
             children: [
               const Text('Доставка через: '),
-              Text('${(order.deliveryIn-(DateTime.now().millisecondsSinceEpoch-order.created))/1000/60} минут'),
-            ],),
-          const SizedBox(height: 8,),
-          Row(mainAxisSize:MainAxisSize.max,
+              Text(
+                  '${(order.deliveryIn - (DateTime.now().millisecondsSinceEpoch - order.created)) / 1000 / 60} минут'),
+            ],
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
             children: [
               const Text('Цена заказа: '),
               Text('${order.cost} руб'),
-            ],),
+            ],
+          ),
           Expanded(
             child: Column(
-              //mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
                   child: Container(
                     alignment: Alignment.bottomLeft,
                     child: LinearProgressIndicator(
-                        minHeight: 8,
-                        value:(DateTime.now().millisecondsSinceEpoch-order.created)/order.deliveryIn,
+                      minHeight: 8,
+                      value: (DateTime.now().millisecondsSinceEpoch -
+                              order.created) /
+                          order.deliveryIn,
                     ),
                   ),
                 ),
                 Expanded(
                   child: Container(
                     alignment: Alignment.bottomCenter,
-                    child: Row(children: [
-                      Expanded(child: ElevatedButton(onPressed: () => ref.invalidate(orderProvider),child: const Text('Обновить'),))
-                    ],),
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: ElevatedButton(
+                          onPressed: () => ref.invalidate(orderProvider),
+                          child: const Text('Обновить'),
+                        ))
+                      ],
+                    ),
                   ),
                 ),
               ],
