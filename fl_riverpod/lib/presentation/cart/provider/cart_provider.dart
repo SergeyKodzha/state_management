@@ -4,10 +4,10 @@ import '../../../application/store_service.dart';
 import '../../../common/presentation/provider/store_service_provider.dart';
 import '../../../domain/entities/Cart.dart';
 
-class FetchCartController extends StateNotifier<AsyncValue<Cart>> {
+class FetchCartModel extends StateNotifier<AsyncValue<Cart>> {
   final StoreService _storeService;
 
-  FetchCartController(this._storeService) : super(const AsyncValue.loading()) {
+  FetchCartModel(this._storeService) : super(const AsyncValue.loading()) {
     fetch();
   }
 
@@ -22,5 +22,5 @@ class FetchCartController extends StateNotifier<AsyncValue<Cart>> {
 }
 
 final cartProvider =
-    StateNotifierProvider.autoDispose<FetchCartController, AsyncValue<Cart>>(
-        (ref) => FetchCartController(ref.watch(storeServiceProvider)));
+    StateNotifierProvider.autoDispose<FetchCartModel, AsyncValue<Cart>>(
+        (ref) => FetchCartModel(ref.watch(storeServiceProvider)));

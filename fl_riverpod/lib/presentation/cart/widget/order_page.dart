@@ -1,3 +1,4 @@
+import 'package:fl_riverpod/presentation/cart/widget/two_text_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -40,34 +41,24 @@ class OrderPage extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              const Text('Создан: '),
-              Text(DateTime.fromMillisecondsSinceEpoch(order.created)
-                  .toString()),
-            ],
+          TwoTextRow(
+              leftText: const Text('Создан: '),
+              rightText: Text(DateTime.fromMillisecondsSinceEpoch(order.created)
+                  .toString())),
+          const SizedBox(
+            height: 8,
+          ),
+          TwoTextRow(
+            leftText: const Text('Доставка через: '),
+            rightText: Text(
+                '${(order.deliveryIn - (DateTime.now().millisecondsSinceEpoch - order.created)) / 1000 / 60} минут'),
           ),
           const SizedBox(
             height: 8,
           ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              const Text('Доставка через: '),
-              Text(
-                  '${(order.deliveryIn - (DateTime.now().millisecondsSinceEpoch - order.created)) / 1000 / 60} минут'),
-            ],
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              const Text('Цена заказа: '),
-              Text('${order.cost} руб'),
-            ],
+          TwoTextRow(
+            leftText: const Text('Цена заказа: '),
+            rightText: Text('${order.cost} руб'),
           ),
           Expanded(
             child: Column(

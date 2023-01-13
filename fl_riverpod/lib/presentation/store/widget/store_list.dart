@@ -6,7 +6,8 @@ import '../../../domain/entities/product.dart';
 class StoreList extends StatelessWidget {
   final List<Product> products;
   final void Function(Product) onTap;
-  const StoreList({Key? key, required this.products, required this.onTap}) : super(key: key);
+  const StoreList({Key? key, required this.products, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

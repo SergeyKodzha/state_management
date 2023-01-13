@@ -11,7 +11,6 @@ class MockLocalRepository implements LocalRepository {
   Future<SharedPreferences> get _sPrefs async =>
       await SharedPreferences.getInstance();
 
-
   @override
   Future<Cart> fetchCart() async {
     final Map<String, Cart> carts = await _getCartsFromSPrefs();

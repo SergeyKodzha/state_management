@@ -5,12 +5,10 @@ import '../../../application/store_service.dart';
 import '../../../common/presentation/provider/store_service_provider.dart';
 import '../../../domain/entities/product.dart';
 
-class ProductListingController
-    extends StateNotifier<AsyncValue<List<Product>>> {
+class ProductListingModel extends StateNotifier<AsyncValue<List<Product>>> {
   final StoreService _storeService;
 
-  ProductListingController(this._storeService)
-      : super(const AsyncValue.loading()) {
+  ProductListingModel(this._storeService) : super(const AsyncValue.loading()) {
     fetchStoreProducts();
   }
 
@@ -21,5 +19,5 @@ class ProductListingController
 }
 
 final storeListingProvider = StateNotifierProvider.autoDispose<
-        ProductListingController, AsyncValue<List<Product>>>(
-    (ref) => ProductListingController(ref.read(storeServiceProvider)));
+        ProductListingModel, AsyncValue<List<Product>>>(
+    (ref) => ProductListingModel(ref.read(storeServiceProvider)));

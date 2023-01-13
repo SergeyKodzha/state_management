@@ -3,13 +3,13 @@ import '../../../application/store_service.dart';
 import '../../../common/presentation/provider/store_service_provider.dart';
 import '../../../domain/entities/order.dart';
 
-class OrderController extends StateNotifier<AsyncValue<Order?>> {
+class OrderModel extends StateNotifier<AsyncValue<Order?>> {
   final StoreService _service;
   bool _isOrdering = false;
 
   bool get isOrdering => _isOrdering;
 
-  OrderController(this._service) : super(const AsyncValue.data(null)) {
+  OrderModel(this._service) : super(const AsyncValue.data(null)) {
     fetchOrder();
   }
 
@@ -33,5 +33,5 @@ class OrderController extends StateNotifier<AsyncValue<Order?>> {
 }
 
 final orderProvider =
-    StateNotifierProvider.autoDispose<OrderController, AsyncValue<Order?>>(
-        (ref) => OrderController(ref.read(storeServiceProvider)));
+    StateNotifierProvider.autoDispose<OrderModel, AsyncValue<Order?>>(
+        (ref) => OrderModel(ref.read(storeServiceProvider)));

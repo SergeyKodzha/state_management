@@ -3,11 +3,11 @@ import '../../../application/store_service.dart';
 import '../../../common/presentation/provider/store_service_provider.dart';
 import '../../../domain/entities/product.dart';
 
-class CartProductsController
+class CartProductsModel
     extends StateNotifier<AsyncValue<Map<ProductID, Product>>> {
   final StoreService _service;
 
-  CartProductsController(this._service) : super(const AsyncValue.loading());
+  CartProductsModel(this._service) : super(const AsyncValue.loading());
 
   Future<void> fetchCartProducts(List<ProductID> ids) async {
     state = const AsyncValue.loading();
@@ -16,6 +16,6 @@ class CartProductsController
 }
 
 final cartProductsProvider = StateNotifierProvider.autoDispose<
-    CartProductsController, AsyncValue<Map<ProductID, Product>>>((ref) {
-  return CartProductsController(ref.watch(storeServiceProvider));
+    CartProductsModel, AsyncValue<Map<ProductID, Product>>>((ref) {
+  return CartProductsModel(ref.watch(storeServiceProvider));
 });
