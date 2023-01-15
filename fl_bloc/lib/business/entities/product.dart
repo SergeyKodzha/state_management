@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 typedef ProductID = int;
 
-class Product extends Equatable{
+class Product extends Equatable {
   final ProductID id;
   final String name;
   final String image;
@@ -27,6 +27,5 @@ class Product extends Equatable{
       available: json['available']);
 
   @override
-  // TODO: implement props
-  List<Object?> get props => [id,name,image,description,price,available];
+  List<Object?> get props => [id, name, image, description, price, available];
 }

@@ -14,9 +14,8 @@ class MockRemoteRepository implements RemoteRepository {
 
   @override
   Future<Cart> fetchCart(String uid) async {
-    //await Future.delayed(const Duration(seconds: 5));
     final Map<String, Cart> carts = await _getCartsFromSPrefs();
-    final cart=carts[uid] ?? Cart([]);
+    final cart = carts[uid] ?? Cart(const []);
     return cart;
   }
 
@@ -37,7 +36,6 @@ class MockRemoteRepository implements RemoteRepository {
     final Map<ProductID, Product> res = {};
     for (final json in hardcode_products) {
       if (ids == null || ids.contains(json['id'])) {
-        //res.add(Product.fromJson(json));
         res[json['id']] = Product.fromJson(json);
       }
     }
@@ -58,9 +56,8 @@ class MockRemoteRepository implements RemoteRepository {
     if (guestCart != null) {
       await setCart(uid, guestCart);
       carts = await _getCartsFromSPrefs();
-      carts.removeWhere((key, _) => key=='guest');
+      carts.removeWhere((key, _) => key == 'guest');
       await _saveCartsToSPrefs(carts);
-      print('guest cart removed');
       return true;
     }
     return false;
@@ -89,7 +86,6 @@ class MockRemoteRepository implements RemoteRepository {
       //wipe cart
       final carts = await _getCartsFromSPrefs();
       carts.removeWhere((key, _) => key == uid);
-      print('remote carts after order:$carts');
       await _saveCartsToSPrefs(carts);
       return order;
     }

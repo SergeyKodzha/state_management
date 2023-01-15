@@ -1,7 +1,7 @@
 import 'package:fl_hooks/business/application/app_service.dart';
-import 'package:fl_hooks/business/application/auth_controller.dart';
-import 'package:fl_hooks/business/application/cart_controller.dart';
-import 'package:fl_hooks/business/application/store_controller.dart';
+import 'package:fl_hooks/business/application/auth_model.dart';
+import 'package:fl_hooks/business/application/cart_model.dart';
+import 'package:fl_hooks/business/application/store_model.dart';
 import 'package:fl_hooks/common/hook_data_container.dart';
 import 'package:fl_hooks/presentation/auth/auth_page.dart';
 import 'package:fl_hooks/presentation/cart/cart_page.dart';
@@ -57,7 +57,8 @@ class StorePage extends HookWidget {
                             : cart.items.length.toString()
                         : null,
                     onPressed: () {
-                      _navigateToCartPage(context, cartController, authController);
+                      _navigateToCartPage(
+                          context, cartController, authController);
                     }),
           ],
         ),
@@ -119,16 +120,16 @@ class StorePage extends HookWidget {
   }
 
   Future<dynamic> _navigateToAuthPage(
-      BuildContext context, AuthController authController) {
+      BuildContext context, AuthModel authController) {
     return Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => AuthPage( authController),
+          builder: (context) => AuthPage(authController),
         ));
   }
 
   Future<dynamic> _navigateToDetailsPage(BuildContext context,
-      CartController cartController, Product product, CartItem item) {
+      CartModel cartController, Product product, CartItem item) {
     return Navigator.push(
         context,
         MaterialPageRoute(
@@ -137,10 +138,12 @@ class StorePage extends HookWidget {
   }
 
   Future<dynamic> _navigateToCartPage(BuildContext context,
-      CartController cartController,AuthController authController) {
+      CartModel cartController, AuthModel authController) {
     return Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => CartPage(authController: authController, cartController: cartController)));
+            builder: (context) => CartPage(
+                authController: authController,
+                cartController: cartController)));
   }
 }

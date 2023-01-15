@@ -1,6 +1,6 @@
-import 'package:fl_hooks/business/application/auth_controller.dart';
+import 'package:fl_hooks/business/application/auth_model.dart';
 import 'package:fl_hooks/business/application/cart_data_loader.dart';
-import 'package:fl_hooks/business/application/order_controller.dart';
+import 'package:fl_hooks/business/application/order_model.dart';
 import 'package:fl_hooks/common/hook_data_container.dart';
 import 'package:fl_hooks/presentation/cart/widgets/cart_item_buy_btn.dart';
 import 'package:fl_hooks/presentation/cart/widgets/cart_item_product.dart';
@@ -8,17 +8,17 @@ import 'package:fl_hooks/presentation/cart/widgets/order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../business/application/cart_controller.dart';
+import '../../business/application/cart_model.dart';
 import '../../business/entities/cart_item.dart';
 import '../auth/auth_page.dart';
 
 class CartPage extends HookWidget {
-  final AuthController _authController;
-  final CartController _cartController;
+  final AuthModel _authController;
+  final CartModel _cartController;
   CartPage(
       {Key? key,
-      required AuthController authController,
-      required CartController cartController})
+      required AuthModel authController,
+      required CartModel cartController})
       : _authController = authController,
         _cartController = cartController,
         super(key: key);
@@ -39,12 +39,14 @@ class CartPage extends HookWidget {
     }
     final products = productLoader.data;
     final order = orderController.data;
-    //print('cart state: ${_cartController.state.value}');
     return order != null
-        ? OrderPage(order: order, onRefresh: () async {
-          await orderController.fetchOrder();
-          await _cartController.fetchCart();
-        },)
+        ? OrderPage(
+            order: order,
+            onRefresh: () async {
+              await orderController.fetchOrder();
+              await _cartController.fetchCart();
+            },
+          )
         : Scaffold(
             appBar: AppBar(
               title: const Text('Корзина'),
@@ -66,13 +68,18 @@ class CartPage extends HookWidget {
                           itemBuilder: (context, index) {
                             if (index < cart.items.length) {
                               final product =
-                                  products![cart.items[index].productId]!;
+                                  products[cart.items[index].productId]!;
                               final item = cart.items[index];
                               return CartItemProduct(
                                   onQuantityChanged: (newVal) {
-                                    final newItem =
-                                        CartItem(item.productId, newVal);
-                                    _cartController.setCartItem(newItem);
+                                    if (newVal!=0) {
+                                      final newItem =
+                                      CartItem(item.productId, newVal);
+                                      _cartController.setCartItem(newItem);
+                                    } else {
+                                      _cartController
+                                          .removeCartItem(item.productId);
+                                    }
                                   },
                                   onRemove: () {
                                     _cartController
@@ -86,18 +93,17 @@ class CartPage extends HookWidget {
                               num price = 0;
                               for (final item in cart.items) {
                                 final totalPrice =
-                                    products![item.productId]?.price ?? 0;
+                                    products[item.productId]?.price ?? 0;
                                 price += totalPrice * item.quantity;
                               }
                               return CartItemBuyBtn(
-                                  enabled: true, //!orderController.isLoading,
+                                  enabled: true,
                                   onBuy: () async {
                                     final user = _authController.data;
                                     if (user == null) {
                                       _navigateToAuthPage(
                                           context, _authController);
                                     } else {
-                                      print('order');
                                       await orderController.order();
                                       _cartController.fetchCart();
                                     }
@@ -111,7 +117,7 @@ class CartPage extends HookWidget {
   }
 
   Future<dynamic> _navigateToAuthPage(
-      BuildContext context, AuthController authController) {
+      BuildContext context, AuthModel authController) {
     return Navigator.push(
         context,
         MaterialPageRoute(

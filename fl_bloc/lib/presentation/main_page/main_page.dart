@@ -55,8 +55,15 @@ class _MainPageState extends State<MainPage>
         physics: const NeverScrollableScrollPhysics(),
         controller: _tabController,
         children: [
-          StoreTab(onGoToCart: ()=>(_bottomNavigationKey.currentWidget as BottomNavigationBar).onTap!(1)),
-          CartTab(onAuth: _navigateToAuthPage,onOrder:() => (_bottomNavigationKey.currentWidget as BottomNavigationBar).onTap!(2)),
+          StoreTab(
+              onGoToCart: () =>
+                  (_bottomNavigationKey.currentWidget as BottomNavigationBar)
+                      .onTap!(1)),
+          CartTab(
+              onAuth: _navigateToAuthPage,
+              onOrder: () =>
+                  (_bottomNavigationKey.currentWidget as BottomNavigationBar)
+                      .onTap!(2)),
           OrdersTab(),
         ],
       ),
@@ -82,15 +89,6 @@ class _MainPageState extends State<MainPage>
           setState(() {
             _currentTab = tab;
             _tabController.index = tab;
-            /*
-            if (tab==1) {
-              final cartBloc = context.read<CartBloc>();
-              if (cartBloc.state.status != CartStatus.loading &&
-                  cartBloc.state.status != CartStatus.busy) {
-                cartBloc.add(CartFetchData());
-              }
-            }
-             */
           });
         },
       ),
@@ -101,7 +99,6 @@ class _MainPageState extends State<MainPage>
     final storeBloc = context.read<StoreBloc>();
     final authBloc = context.read<AuthBloc>();
     final cartBloc = context.read<CartBloc>();
-    final oldAuth = authBloc.state.status;
     await Navigator.push(
         context,
         MaterialPageRoute(

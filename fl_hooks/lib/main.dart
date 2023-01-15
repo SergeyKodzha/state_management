@@ -3,7 +3,7 @@ import 'package:fl_hooks/presentation/auth/auth_page.dart';
 import 'package:fl_hooks/presentation/store/store_page.dart';
 import 'package:flutter/material.dart';
 
-import 'business/application/auth_controller.dart';
+import 'business/application/auth_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +12,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,7 +20,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home:StorePage(Injector.instance.appService),
+      home: StorePage(Injector.instance.appService),
     );
   }
 }

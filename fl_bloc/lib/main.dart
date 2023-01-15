@@ -17,17 +17,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appService = Injector.instance.appService;
-    final authBloc=AuthBloc(appService);
-    final storeBloc=StoreBloc(appService);
-    final cartBloc=CartBloc(appService);
-    final orderBloc=OrderBloc(appService,cartBloc);
+    final authBloc = AuthBloc(appService);
+    final storeBloc = StoreBloc(appService);
+    final cartBloc = CartBloc(appService);
+    final orderBloc = OrderBloc(appService, cartBloc);
     return MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (context) => authBloc,
         ),
         BlocProvider(
-          create: (context) =>storeBloc ,
+          create: (context) => storeBloc,
         ),
         BlocProvider(
           create: (context) => cartBloc,
