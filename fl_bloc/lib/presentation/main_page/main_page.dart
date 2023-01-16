@@ -5,6 +5,7 @@ import 'package:fl_bloc/business/bloc/events/cart_events.dart';
 import 'package:fl_bloc/business/bloc/events/order_events.dart';
 import 'package:fl_bloc/business/bloc/events/store_events.dart';
 import 'package:fl_bloc/business/bloc/states/auth_state.dart';
+import 'package:fl_bloc/injector.dart';
 import 'package:fl_bloc/presentation/main_page/tabs/cart/cart_tab.dart';
 import 'package:fl_bloc/presentation/main_page/tabs/orders/orders_tab.dart';
 import 'package:fl_bloc/presentation/main_page/tabs/store/store_tab.dart';

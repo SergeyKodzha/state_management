@@ -5,7 +5,7 @@ import 'data/implementation/mock_remote_repository.dart';
 
 class Injector {
   static final Injector instance = Injector._internal();
-  late AppService appService;
+  late final AppService appService;
   Injector._internal() {
     _init();
   }
