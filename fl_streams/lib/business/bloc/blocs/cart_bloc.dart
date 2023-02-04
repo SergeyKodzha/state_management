@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import '../../../common/custom_bloc/custom_bloc.dart';
 import '../../application/app_service.dart';
 import '../events/cart_events.dart';

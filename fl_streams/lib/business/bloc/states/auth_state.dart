@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-
 import '../../../common/auth_error.dart';
 import '../../entities/user.dart';
 

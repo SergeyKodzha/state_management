@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-
 import '../../../../../business/entities/product.dart';
 
 class StoreItem extends StatelessWidget {
   final Product product;
   final void Function(Product)? onTap;
-  const StoreItem({Key? key, required this.product, this.onTap}) : super(key: key);
+  const StoreItem({Key? key, required this.product, this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +14,7 @@ class StoreItem extends StatelessWidget {
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-              children: [
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
@@ -35,8 +33,8 @@ class StoreItem extends StatelessWidget {
                 alignment: Alignment.bottomLeft,
                 child: Text(
                   product.name,
-                  style:
-                      const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 16),
                 )),
             const SizedBox(
               height: 8,

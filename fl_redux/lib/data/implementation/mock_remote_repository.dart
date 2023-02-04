@@ -1,9 +1,5 @@
 import 'dart:convert';
-import 'dart:math';
-
-import 'package:collection/collection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../business/entities/cart.dart';
 import '../../business/entities/order.dart';
 import '../../business/entities/product.dart';
@@ -16,9 +12,8 @@ class MockRemoteRepository implements RemoteRepository {
 
   @override
   Future<Cart> fetchCart(String uid) async {
-    //await Future.delayed(const Duration(seconds: 5));
     final Map<String, Cart> carts = await _getCartsFromSPrefs();
-    final cart=carts[uid] ?? Cart([]);
+    final cart = carts[uid] ?? Cart([]);
     return cart;
   }
 
@@ -26,7 +21,7 @@ class MockRemoteRepository implements RemoteRepository {
   Future<List<Product>> fetchAllProducts() async {
     await Future.delayed(const Duration(seconds: 1));
     final List<Product> res = [];
-    for (final json in hardcode_products) {
+    for (final json in productsHardcode) {
       res.add(Product.fromJson(json));
     }
     return res;
@@ -37,9 +32,8 @@ class MockRemoteRepository implements RemoteRepository {
       List<ProductID>? ids) async {
     await Future.delayed(const Duration(seconds: 1));
     final Map<ProductID, Product> res = {};
-    for (final json in hardcode_products) {
+    for (final json in productsHardcode) {
       if (ids == null || ids.contains(json['id'])) {
-        //res.add(Product.fromJson(json));
         res[json['id']] = Product.fromJson(json);
       }
     }
@@ -60,9 +54,8 @@ class MockRemoteRepository implements RemoteRepository {
     if (guestCart != null) {
       await setCart(uid, guestCart);
       carts = await _getCartsFromSPrefs();
-      carts.removeWhere((key, _) => key=='guest');
+      carts.removeWhere((key, _) => key == 'guest');
       await _saveCartsToSPrefs(carts);
-      print('guest cart removed');
       return true;
     }
     return false;
@@ -91,7 +84,6 @@ class MockRemoteRepository implements RemoteRepository {
       //wipe cart
       final carts = await _getCartsFromSPrefs();
       carts.removeWhere((key, _) => key == uid);
-      print('remote carts after order:$carts');
       await _saveCartsToSPrefs(carts);
       return order;
     }
@@ -102,9 +94,9 @@ class MockRemoteRepository implements RemoteRepository {
   Future<List<Order>> fetchOrders(String uid) async {
     await Future.delayed(const Duration(seconds: 1));
     final orders = await _getOrdersFromSPrefs();
-    final List<Order> res=[];
-    for (final order in orders){
-      if (order.ownerId==uid) {
+    final List<Order> res = [];
+    for (final order in orders) {
+      if (order.ownerId == uid) {
         res.add(order);
       }
     }
@@ -117,7 +109,6 @@ class MockRemoteRepository implements RemoteRepository {
     final List<Order> res = []; //uid->order
     for (final str in ordStr) {
       final entry = jsonDecode(str);
-      //final uid = entry['uid'];
       final order = Order.fromJson(entry['order']);
       res.add(order);
     }

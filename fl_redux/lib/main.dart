@@ -1,10 +1,8 @@
-
 import 'package:fl_redux/injector.dart';
 import 'package:fl_redux/presentation/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-
 import 'business/redux/middlewares/auth_middleware.dart';
 import 'business/redux/middlewares/cart_middleware.dart';
 import 'business/redux/middlewares/orders_middleware.dart';
@@ -31,7 +29,6 @@ class MyApp extends StatelessWidget {
   final Store<AppState> store;
   const MyApp({super.key, required this.store});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(

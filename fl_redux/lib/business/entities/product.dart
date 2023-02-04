@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 typedef ProductID = int;
 
-class Product{
+class Product {
   final ProductID id;
   final String name;
   final String image;

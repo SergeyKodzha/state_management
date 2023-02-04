@@ -6,10 +6,10 @@ class CartIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return superscript == null || superscript==0
+    return superscript == null || superscript == 0
         ? const Icon(Icons.shopping_cart)
         : Stack(
-      clipBehavior: Clip.none,
+            clipBehavior: Clip.none,
             children: [
               const Icon(Icons.shopping_cart),
               Positioned(

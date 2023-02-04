@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../business/bloc/blocs/auth_bloc.dart';
 import '../../../../business/bloc/blocs/cart_bloc.dart';
 import '../../../../business/bloc/blocs/order_bloc.dart';

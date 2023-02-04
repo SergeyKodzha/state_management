@@ -21,7 +21,7 @@ class MockRemoteRepository implements RemoteRepository {
   Future<List<Product>> fetchAllProducts() async {
     await Future.delayed(const Duration(seconds: 1));
     final List<Product> res = [];
-    for (final json in hardcode_products) {
+    for (final json in productsHardcode) {
       res.add(Product.fromJson(json));
     }
     return res;
@@ -32,7 +32,7 @@ class MockRemoteRepository implements RemoteRepository {
       List<ProductID>? ids) async {
     await Future.delayed(const Duration(seconds: 1));
     final Map<ProductID, Product> res = {};
-    for (final json in hardcode_products) {
+    for (final json in productsHardcode) {
       if (ids == null || ids.contains(json['id'])) {
         res[json['id']] = Product.fromJson(json);
       }

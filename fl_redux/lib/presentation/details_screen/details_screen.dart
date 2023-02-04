@@ -2,7 +2,6 @@ import 'package:collection/collection.dart';
 import 'package:fl_redux/common/widgets/loading_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-
 import '../../business/entities/cart_item.dart';
 import '../../business/entities/product.dart';
 import '../../business/redux/actions/cart_actions.dart';
@@ -13,7 +12,9 @@ import '../../common/widgets/quantity_widget.dart';
 class DetailsScreen extends StatelessWidget {
   final Product product;
   final VoidCallback onGoToCart;
-  const DetailsScreen({Key? key, required this.product, required this.onGoToCart}) : super(key: key);
+  const DetailsScreen(
+      {Key? key, required this.product, required this.onGoToCart})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +93,6 @@ class DetailsScreen extends StatelessWidget {
                               height: 16,
                             ),
                             Row(
-                              //mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 const Text(
@@ -104,7 +104,6 @@ class DetailsScreen extends StatelessWidget {
                                       children: [
                                         LayoutBuilder(
                                           builder: (_, __) {
-                                            //final item=cart.items.firstWhereOrNull((i) => i.productId==this.item.productId);
                                             final enabled = cartData.state ==
                                                 CartState.idle;
                                             return QuantityWidget(
@@ -112,7 +111,11 @@ class DetailsScreen extends StatelessWidget {
                                                 onChanged: (newVal) {
                                                   final newItem = CartItem(
                                                       product.id, newVal);
-                                                  StoreProvider.of<AppState>(context).dispatch(UpdateCartItemAction(newItem));
+                                                  StoreProvider.of<AppState>(
+                                                          context)
+                                                      .dispatch(
+                                                          UpdateCartItemAction(
+                                                              newItem));
                                                 },
                                                 quantity: item?.quantity ?? 0,
                                                 available: product.available);

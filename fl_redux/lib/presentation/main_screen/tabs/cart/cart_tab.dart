@@ -1,8 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-
-
 import '../../../../business/entities/cart_item.dart';
 import '../../../../business/redux/actions/cart_actions.dart';
 import '../../../../business/redux/actions/order_actions.dart';
@@ -15,11 +12,12 @@ import 'widgets/cart_item_product.dart';
 class CartTab extends StatelessWidget {
   final VoidCallback onAuth;
   final VoidCallback onOrder;
-  CartTab({Key? key, required this.onAuth, required this.onOrder}) : super(key: key);
+  CartTab({Key? key, required this.onAuth, required this.onOrder})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final store = StoreProvider.of<AppState>(context,listen: false);
+    final store = StoreProvider.of<AppState>(context, listen: false);
     final cart = store.state.cartData.cart;
     final products = store.state.cartData.products;
     final enabled = store.state.cartData.state == CartState.idle;
@@ -37,8 +35,12 @@ class CartTab extends StatelessWidget {
                   final item = cart.items[index];
                   return CartItemProduct(
                       onQuantityChanged: (newVal) {
-                        final newItem = CartItem(item.productId, newVal);
-                        store.dispatch(UpdateCartItemAction(newItem));
+                        if (newVal!=0) {
+                          final newItem = CartItem(item.productId, newVal);
+                          store.dispatch(UpdateCartItemAction(newItem));
+                        } else {
+                          store.dispatch(DeleteCartItemAction(item.productId));
+                        }
                       },
                       onRemove: () {
                         store.dispatch(DeleteCartItemAction(item.productId));
@@ -55,9 +57,10 @@ class CartTab extends StatelessWidget {
                   return CartItemBuyBtn(
                       enabled: enabled,
                       onBuy: () {
-                        final store=StoreProvider.of<AppState>(context,listen: false);
-                        final auth=store.state.authData;
-                        if (auth.state!=AuthState.authed){
+                        final store =
+                            StoreProvider.of<AppState>(context, listen: false);
+                        final auth = store.state.authData;
+                        if (auth.state != AuthState.authed) {
                           onAuth.call();
                         } else {
                           store.dispatch(DoOrderAction());

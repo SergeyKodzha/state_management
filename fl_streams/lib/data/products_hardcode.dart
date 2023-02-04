@@ -1,4 +1,4 @@
-final List<Map<String, dynamic>> hardcode_products = [
+final List<Map<String, dynamic>> productsHardcode = [
   {
     'id': 0,
     'image': 'pants.jpg',
