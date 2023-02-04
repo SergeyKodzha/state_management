@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import '../../../../../business/entities/order.dart';
 
 class OrderItem extends StatelessWidget {
@@ -24,8 +25,7 @@ class OrderItem extends StatelessWidget {
                   child: Text(
                     'Заказ #${order.id}',
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Padding(
@@ -38,23 +38,23 @@ class OrderItem extends StatelessWidget {
               ],
             ),
             Row(
+              //mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: _icon(),
-                ),
+               Padding(
+                 padding: const EdgeInsets.only(left: 8.0),
+                 child: _icon(),
+               ),
                 SizedBox(
                   width: 16,
                 ),
                 Column(
+                  //mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
                       height: 8,
                     ),
-                    Text(
-                      'Цена: ${order.cost} руб',
-                    ),
+                    Text('Цена: ${order.cost} руб',),
                     const SizedBox(
                       height: 8,
                     ),
@@ -69,42 +69,37 @@ class OrderItem extends StatelessWidget {
           ],
         )));
   }
-
-  Widget _icon() {
-    final delivered = _delivered;
+  Widget _icon(){
+    final delivered=_delivered;
     return Container(
       width: 50,
       height: 50,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: delivered ? Colors.green : Colors.yellow,
+        color: delivered?Colors.green:Colors.yellow,
       ),
-      child: Icon(delivered ? Icons.done : Icons.delivery_dining, size: 40),
+      child: Icon(delivered?Icons.done:Icons.delivery_dining,size: 40),
     );
   }
-
-  String get _date {
+  String get _date{
     final DateTime date = DateTime.fromMillisecondsSinceEpoch(order.created);
     final DateFormat formatter = DateFormat('dd-MM-yyyy');
     return formatter.format(date);
   }
-
-  String get _status {
-    final timeLast = order.deliveryIn -
-        (DateTime.now().millisecondsSinceEpoch - order.created);
-    if (timeLast <= 0) {
+  String get _status{
+    final timeLast=order.deliveryIn-(DateTime.now().millisecondsSinceEpoch-order.created);
+    if (timeLast<=0){
       return 'Доставлено';
     } else {
-      if (timeLast > 60 * 1000) {
-        return 'Доставка через ${timeLast.toDouble() / 1000 ~/ 60} минут';
+      print('delivery in $timeLast');
+      if (timeLast>60*1000){
+        return 'Доставка через ${timeLast.toDouble()/1000~/60} минут';
       } else {
-        return 'Доставка через ${timeLast.toDouble() / 1000} секунд';
+        return 'Доставка через ${timeLast.toDouble()/1000} секунд';
       }
     }
   }
-
-  bool get _delivered {
-    return DateTime.now().millisecondsSinceEpoch >=
-        order.created + order.deliveryIn;
+  bool get _delivered{
+    return DateTime.now().millisecondsSinceEpoch>=order.created+order.deliveryIn;
   }
 }

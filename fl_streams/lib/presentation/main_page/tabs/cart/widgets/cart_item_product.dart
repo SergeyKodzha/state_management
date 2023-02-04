@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../../../business/entities/cart_item.dart';
 import '../../../../../business/entities/product.dart';
 import '../../../../../common/widgets/quantity_widget.dart';

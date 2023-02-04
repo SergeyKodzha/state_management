@@ -1,11 +1,11 @@
-final List<Map<String, dynamic>> productsHardcode = [
+final List<Map<String, dynamic>> hardcode_products = [
   {
     'id': 0,
     'image': 'pants.jpg',
     'name': 'трусы',
     'description': 'Трусы семейные\nмужские',
     'price': 250,
-    'available': 10,
+    'available':10,
   },
   {
     'id': 1,
@@ -13,7 +13,7 @@ final List<Map<String, dynamic>> productsHardcode = [
     'name': 'кросовки',
     'description': 'Кросовки юнисекс\nбелые',
     'price': 2000,
-    'available': 10,
+    'available':10,
   },
   {
     'id': 2,
@@ -21,7 +21,7 @@ final List<Map<String, dynamic>> productsHardcode = [
     'name': 'носки',
     'description': 'Носки обычные\nсиние',
     'price': 200,
-    'available': 10,
+    'available':10,
   },
   {
     'id': 3,
@@ -29,7 +29,7 @@ final List<Map<String, dynamic>> productsHardcode = [
     'name': 'стол',
     'description': 'Стол круглый \nдерево',
     'price': 3000,
-    'available': 10,
+    'available':10,
   },
   {
     'id': 4,
@@ -37,7 +37,7 @@ final List<Map<String, dynamic>> productsHardcode = [
     'name': 'стул',
     'description': 'Стул офисный\nчерный',
     'price': 3000,
-    'available': 10,
+    'available':10,
   },
   {
     'id': 5,
@@ -45,7 +45,7 @@ final List<Map<String, dynamic>> productsHardcode = [
     'name': 'куртка',
     'description': 'Куртка черная\nдемисезонная',
     'price': 2000,
-    'available': 10,
+    'available':10,
   },
   {
     'id': 6,
@@ -53,7 +53,7 @@ final List<Map<String, dynamic>> productsHardcode = [
     'name': 'джинсы',
     'description': 'Джинсы мужские\nсиние',
     'price': 1500,
-    'available': 10,
+    'available':10,
   },
   {
     'id': 7,
@@ -61,7 +61,7 @@ final List<Map<String, dynamic>> productsHardcode = [
     'name': 'ноутбук',
     'description': 'Ноутбук \nHewlett-Packard',
     'price': 55000,
-    'available': 10,
+    'available':10,
   },
   {
     'id': 8,
@@ -69,6 +69,6 @@ final List<Map<String, dynamic>> productsHardcode = [
     'name': 'пчела',
     'description': 'Пчела плюшевая \nупоротая',
     'price': 1000,
-    'available': 10,
+    'available':10,
   },
 ];

@@ -6,13 +6,11 @@ class LoginTab extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
   final ValueNotifier<bool> btnEnabled = ValueNotifier(false);
-  final void Function(String, String)? onLogin;
-  LoginTab(
-      {Key? key, String? prefilledName, String? prefilledPass, this.onLogin})
-      : super(key: key) {
-    _nameController.text = prefilledName ?? '';
-    _passController.text = prefilledPass ?? '';
-    btnEnabled.value = _isBtnEnabled();
+  final void Function(String,String)? onLogin;
+  LoginTab({Key? key,String? prefilledName,String? prefilledPass, this.onLogin}) : super(key: key){
+    _nameController.text=prefilledName??'';
+    _passController.text=prefilledPass??'';
+    btnEnabled.value=_isBtnEnabled();
   }
 
   @override
@@ -62,10 +60,8 @@ class LoginTab extends StatelessWidget {
                     ValueListenableBuilder<bool>(
                         valueListenable: btnEnabled,
                         builder: (context, enabled, child) => ElevatedButton(
-                              onPressed: !enabled
-                                  ? null
-                                  : () => onLogin?.call(_nameController.text,
-                                      _passController.text),
+                              onPressed: !enabled ? null : ()=>onLogin?.call(_nameController.text,_passController.text),
+                              //onPressed: !enabled ? null : () {},
                               child: const Text("авторизоваться"),
                             )),
                   ],

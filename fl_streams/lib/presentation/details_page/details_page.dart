@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../business/bloc/blocs/cart_bloc.dart';
 import '../../business/bloc/events/cart_events.dart';
 import '../../business/bloc/states/cart_state.dart';

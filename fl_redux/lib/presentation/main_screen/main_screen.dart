@@ -5,6 +5,7 @@ import 'package:fl_redux/presentation/main_screen/widgets/cart_icon.dart';
 import 'package:fl_redux/presentation/main_screen/tabs/store/store_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+
 import '../../business/redux/actions/cart_actions.dart';
 import '../../business/redux/actions/order_actions.dart';
 import '../../business/redux/actions/store_actions.dart';
@@ -25,7 +26,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen>
     with SingleTickerProviderStateMixin {
-  final GlobalKey bottomNavigationKey = GlobalKey(debugLabel: 'bnb_key');
+  final GlobalKey bottomNavigationKey=GlobalKey(debugLabel: 'bnb_key');
   late TabController _tabController;
   int _currentTab = 0;
   @override
@@ -67,12 +68,9 @@ class _MainScreenState extends State<MainScreen>
               builder: (context, vm) {
                 return vm.state == StoreState.loading
                     ? const LoadingTab()
-                    : StoreTab(
-                        onGoToCart: () => (bottomNavigationKey.currentWidget
-                                as BottomNavigationBar)
-                            .onTap!(1),
-                      );
+                    : StoreTab(onGoToCart: () => (bottomNavigationKey.currentWidget as BottomNavigationBar).onTap!(1),);
               }),
+          //const Center(child: Text('tab 1')),
           StoreConnector<AppState, CartState>(
             distinct: true,
             converter: (store) {
@@ -81,15 +79,10 @@ class _MainScreenState extends State<MainScreen>
             builder: (context, cartState) {
               return cartState == CartState.loading
                   ? const LoadingTab()
-                  : CartTab(
-                      onAuth: () => _navigateToAuthScreen(),
-                      onOrder: () => (bottomNavigationKey.currentWidget
-                              as BottomNavigationBar)
-                          .onTap!(2),
-                    );
+                  : CartTab(onAuth: () => _navigateToAuthScreen(),onOrder: () => (bottomNavigationKey.currentWidget as BottomNavigationBar).onTap!(2),);
             },
           ),
-          OrdersTab(),
+         OrdersTab(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -102,6 +95,7 @@ class _MainScreenState extends State<MainScreen>
               icon: StoreConnector<AppState, int>(
                 distinct: true,
                 converter: (store) {
+                  //return CartButtonViewModel(store.state.cartData.cart.items.length);
                   return store.state.cartData.cart.items.length;
                 },
                 builder: (context, numItems) => CartIcon(superscript: numItems),
@@ -138,8 +132,8 @@ class _MainScreenState extends State<MainScreen>
 
     if (store.state.authData.state == AuthState.authed) {
       store.dispatch(FetchCartDataAction());
-      if (_currentTab == 2) {
-        if (store.state.ordersData.state != OrdersState.ordering) {
+      if (_currentTab==2){
+        if (store.state.ordersData.state!=OrdersState.ordering) {
           store.dispatch(FetchOrdersAction());
         }
       }

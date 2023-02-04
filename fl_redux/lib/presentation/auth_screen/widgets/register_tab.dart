@@ -7,14 +7,12 @@ class RegisterTab extends StatelessWidget {
   final TextEditingController _passController = TextEditingController();
   final TextEditingController _passConfirmController = TextEditingController();
   final ValueNotifier<bool> btnEnabled = ValueNotifier(false);
-  final void Function(String, String)? onRegister;
-  RegisterTab(
-      {Key? key, String? prefilledName, String? prefilledPass, this.onRegister})
-      : super(key: key) {
-    _nameController.text = prefilledName ?? '';
-    _passController.text = prefilledPass ?? '';
-    _passConfirmController.text = prefilledPass ?? '';
-    btnEnabled.value = _isBtnEnabled();
+  final void Function(String,String)? onRegister;
+  RegisterTab({Key? key,String? prefilledName,String? prefilledPass, this.onRegister}) : super(key: key){
+    _nameController.text=prefilledName??'';
+    _passController.text=prefilledPass??'';
+    _passConfirmController.text=prefilledPass??'';
+    btnEnabled.value=_isBtnEnabled();
   }
 
   @override
@@ -74,12 +72,10 @@ class RegisterTab extends StatelessWidget {
                     ValueListenableBuilder<bool>(
                         valueListenable: btnEnabled,
                         builder: (context, enabled, child) => ElevatedButton(
-                              onPressed: !enabled
-                                  ? null
-                                  : () => onRegister?.call(_nameController.text,
-                                      _passController.text),
-                              child: const Text("Зарегестрироваться"),
-                            )),
+                          onPressed: !enabled ? null : ()=>onRegister?.call(_nameController.text,_passController.text),
+                          //onPressed: !enabled ? null : () {},
+                          child: const Text("Зарегестрироваться"),
+                        )),
                   ],
                 ),
               )),
@@ -92,7 +88,7 @@ class RegisterTab extends StatelessWidget {
     final text1 = _nameController.text;
     final text2 = _passController.text;
     final text3 = _passConfirmController.text;
-    if (text1.isEmpty || text2.isEmpty || text3.isEmpty || text2 != text3) {
+    if (text1.isEmpty || text2.isEmpty || text3.isEmpty || text2!=text3) {
       return false;
     }
     return true;

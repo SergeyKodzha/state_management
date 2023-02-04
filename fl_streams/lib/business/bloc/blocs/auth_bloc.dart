@@ -1,5 +1,4 @@
 import 'package:fl_streams/common/error_response.dart';
-
 import '../../../common/auth_error.dart';
 import '../../../common/custom_bloc/custom_bloc.dart';
 import '../../application/app_service.dart';

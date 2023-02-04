@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../business/entities/product.dart';
 
 class StoreItem extends StatelessWidget {

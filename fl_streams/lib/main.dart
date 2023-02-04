@@ -1,7 +1,6 @@
 import 'package:fl_streams/presentation/main_page/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'business/bloc/blocs/auth_bloc.dart';
 import 'business/bloc/blocs/cart_bloc.dart';
 import 'business/bloc/blocs/order_bloc.dart';
