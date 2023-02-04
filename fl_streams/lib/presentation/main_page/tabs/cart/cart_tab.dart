@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -45,8 +44,13 @@ class CartTab extends StatelessWidget {
                         final item = cart.items[index];
                         return CartItemProduct(
                             onQuantityChanged: (newVal) {
-                              final newItem = CartItem(item.productId, newVal);
-                              bloc.add(CartUpdateItem(newItem));
+                              if (newVal != 0) {
+                                final newItem =
+                                    CartItem(item.productId, newVal);
+                                bloc.add(CartUpdateItem(newItem));
+                              } else {
+                                bloc.add(CartRemoveItem(item.productId));
+                              }
                             },
                             onRemove: () {
                               bloc.add(CartRemoveItem(item.productId));

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +9,8 @@ import '../../../../common/custom_bloc/bloc_builder.dart';
 import 'widgets/order_item.dart';
 
 class OrdersTab extends StatefulWidget {
+  const OrdersTab({super.key});
+
   @override
   State<StatefulWidget> createState() => _OrdersState();
 }

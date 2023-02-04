@@ -74,7 +74,9 @@ class _AuthPageState extends State<AuthPage> {
                         onRegister: (name, pass) {
                           _registerName = name;
                           _registerPass = pass;
-                          context.read<AuthBloc>().add(AuthRegister(name: name, pass: pass));
+                          context
+                              .read<AuthBloc>()
+                              .add(AuthRegister(name: name, pass: pass));
                         },
                       ),
               ],

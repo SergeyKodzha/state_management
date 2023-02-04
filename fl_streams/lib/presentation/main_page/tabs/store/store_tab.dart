@@ -10,7 +10,7 @@ import 'widgets/store_item.dart';
 
 class StoreTab extends StatelessWidget {
   final VoidCallback _onGoToCart;
-  const StoreTab({super.key, required onGoToCart}):_onGoToCart=onGoToCart;
+  const StoreTab({super.key, required onGoToCart}) : _onGoToCart = onGoToCart;
 
   @override
   Widget build(BuildContext context) {

@@ -15,20 +15,27 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     final appService = Injector.instance.appService;
-    final authBloc=AuthBloc(appService);
-    final storeBloc=StoreBloc(appService);
-    final cartBloc=CartBloc(appService);
-    final orderBloc=OrderBloc(appService,cartBloc);
+    final authBloc = AuthBloc(appService);
+    final storeBloc = StoreBloc(appService);
+    final cartBloc = CartBloc(appService);
+    final orderBloc = OrderBloc(appService, cartBloc);
     return MultiProvider(
       providers: [
-        Provider<AuthBloc>(create:(context) => authBloc, ),
-        Provider<StoreBloc>(create:(context) => storeBloc, ),
-        Provider<CartBloc>(create:(context) => cartBloc, ),
-        Provider<OrderBloc>(create:(context) => orderBloc, ),
+        Provider<AuthBloc>(
+          create: (context) => authBloc,
+        ),
+        Provider<StoreBloc>(
+          create: (context) => storeBloc,
+        ),
+        Provider<CartBloc>(
+          create: (context) => cartBloc,
+        ),
+        Provider<OrderBloc>(
+          create: (context) => orderBloc,
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

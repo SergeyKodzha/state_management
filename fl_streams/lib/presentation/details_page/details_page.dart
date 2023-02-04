@@ -2,7 +2,6 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
 import '../../business/bloc/blocs/cart_bloc.dart';
 import '../../business/bloc/events/cart_events.dart';
 import '../../business/bloc/states/cart_state.dart';
@@ -94,7 +93,6 @@ class DetailsPage extends StatelessWidget {
                               height: 16,
                             ),
                             Row(
-                              //mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 const Text(
@@ -115,7 +113,6 @@ class DetailsPage extends StatelessWidget {
                                                       product.id, newVal);
                                                   context.read<CartBloc>().add(
                                                       CartUpdateItem(newItem));
-                                                  //StoreProvider.of<AppState>(context).dispatch(UpdateCartItemAction(newItem));
                                                 },
                                                 quantity: item?.quantity ?? 0,
                                                 available: product.available);
@@ -136,13 +133,13 @@ class DetailsPage extends StatelessWidget {
                                   Row(
                                     children: [
                                       Expanded(
-                                        child:ElevatedButton(
-                                                onPressed: () {
-                                                        Navigator.pop(context);
-                                                        onGoToCart.call();
-                                                      },
-                                                child: const Text(
-                                                    'Перейти к оформлению')),
+                                        child: ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                              onGoToCart.call();
+                                            },
+                                            child: const Text(
+                                                'Перейти к оформлению')),
                                       ),
                                     ],
                                   ),

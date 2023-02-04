@@ -2,15 +2,15 @@ import 'package:fl_streams/common/custom_bloc/custom_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class BlocBuilder<B extends CustomBloc<dynamic,S>, S> extends StatefulWidget {
+class BlocBuilder<B extends CustomBloc<dynamic, S>, S> extends StatefulWidget {
   final Widget Function(BuildContext, S) builder;
   final void Function(Object)? onError;
   const BlocBuilder({super.key, required this.builder, this.onError});
   @override
-  State<StatefulWidget> createState() => _BlocBuilderState<B,S>();
+  State<StatefulWidget> createState() => _BlocBuilderState<B, S>();
 }
 
-class _BlocBuilderState<B extends CustomBloc<dynamic,S>, S>
+class _BlocBuilderState<B extends CustomBloc<dynamic, S>, S>
     extends State<BlocBuilder<B, S>> {
   late B bloc;
   @override
