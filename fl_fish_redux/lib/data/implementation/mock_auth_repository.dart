@@ -22,7 +22,6 @@ class MockAuthRepository implements AuthRepository {
         return user;
       }
     }
-    print('auth error');
     throw ErrorResponse('Пользователь не найден');
   }
 

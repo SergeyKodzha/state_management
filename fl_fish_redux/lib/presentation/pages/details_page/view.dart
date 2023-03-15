@@ -12,12 +12,6 @@ import 'actions.dart';
 Widget buildPage(
     DetailsState state, Dispatch dispatch, ViewService viewService) {
   return Builder(builder: (context) {
-    /*
-    final args =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-    final product = args['product'] as Product;
-    final item = args['item'] as CartItem;
-     */
     final product = state.product;
     final item = state.cartItem;
     return Scaffold(
@@ -84,7 +78,6 @@ Widget buildPage(
                       height: 16,
                     ),
                     Row(
-                      //mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         const Text(
@@ -125,7 +118,6 @@ Widget buildPage(
                               Expanded(
                                 child: ElevatedButton(
                                     onPressed: () {
-                                      //Navigator.pop(context);
                                       dispatch(DetailsActions.goToCart());
                                     },
                                     child: const Text('Перейти к оформлению')),

@@ -70,7 +70,6 @@ class _MainScreenState extends State<MainScreen>
                     ? const LoadingTab()
                     : StoreTab(onGoToCart: () => (bottomNavigationKey.currentWidget as BottomNavigationBar).onTap!(1),);
               }),
-          //const Center(child: Text('tab 1')),
           StoreConnector<AppState, CartState>(
             distinct: true,
             converter: (store) {
@@ -82,7 +81,7 @@ class _MainScreenState extends State<MainScreen>
                   : CartTab(onAuth: () => _navigateToAuthScreen(),onOrder: () => (bottomNavigationKey.currentWidget as BottomNavigationBar).onTap!(2),);
             },
           ),
-         OrdersTab(),
+         const OrdersTab(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -95,7 +94,6 @@ class _MainScreenState extends State<MainScreen>
               icon: StoreConnector<AppState, int>(
                 distinct: true,
                 converter: (store) {
-                  //return CartButtonViewModel(store.state.cartData.cart.items.length);
                   return store.state.cartData.cart.items.length;
                 },
                 builder: (context, numItems) => CartIcon(superscript: numItems),

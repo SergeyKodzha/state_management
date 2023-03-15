@@ -14,10 +14,8 @@ extension MutableCart on Cart {
     final index = itemsCopy.indexWhere((item) =>
     item.productId == to.productId);
     if (index >= 0) {
-      print('item updated ${to.quantity}');
       itemsCopy[index] = to;
     } else{
-      print('new item added');
       itemsCopy.add(to);
     }
     return Cart(itemsCopy);

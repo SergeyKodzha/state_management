@@ -9,6 +9,5 @@ class CartTabViewModel extends Equatable{
 
   const CartTabViewModel(this.cart, this.products);
   @override
-  // TODO: implement props
   List<Object?> get props => [cart,products];
 }

@@ -32,7 +32,6 @@ Effect<MainState> buildEffect() {
 }
 
 void _init(Action action, Context<MainState> ctx) {
-  print('app init');
   ctx.state.tabController=TabController(length: 3, vsync: ctx.stfState as TickerProvider);
 }
 

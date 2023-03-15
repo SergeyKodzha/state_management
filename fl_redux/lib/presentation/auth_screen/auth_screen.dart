@@ -51,7 +51,6 @@ class _AuthScreenState extends State<AuthScreen> {
                 converter: (store) => store.state.authData,
                 builder: (context, auth) {
                   final busy = auth.state == AuthState.inProgress;
-                  //print('login:$authState');
                   if (auth.state == AuthState.error) {
                     _showSnackBarOnNextFrame(
                         auth.error?.message ?? 'unknown error');
@@ -107,10 +106,7 @@ class _AuthScreenState extends State<AuthScreen> {
   void _leave(){
     final store=StoreProvider.of<AppState>(context);
     if (store.state.authData.state!=AuthState.authed) {
-      print('not logged');
       StoreProvider.of<AppState>(context).dispatch(AuthNotLoggedAction());
-    } else {
-      print('logged');
     }
     Navigator.pop(context);
   }

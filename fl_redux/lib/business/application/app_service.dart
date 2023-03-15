@@ -41,21 +41,17 @@ class AppService{
   }
 
   Future<Cart> setCartItem(CartItem item) async {
-    print('set cart item');
     final cart=await fetchCart();
     final updated=cart.setItem(item);
     await _setCart(updated);
     return updated;
-    //ref.read(cartProvider.notifier).updateState(updated);
   }
 
   Future<Cart> removeCartItem(ProductID id) async {
-    print('remove cart item');
     final cart=await fetchCart();
     final updated=cart.removeItemById(id);
     await _setCart(updated);
     return updated;
-    //ref.read(cartProvider.notifier).updateState(updated);
   }
 
   Future<List<Product>> fetchAllProducts() async {

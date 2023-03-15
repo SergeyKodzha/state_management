@@ -7,7 +7,6 @@ enum AuthStatus { loggedOut, processing, loggedIn }
 class AuthState implements Cloneable<AuthState> {
   AuthStatus status = AuthStatus.loggedOut;
   User? user;
-  //AuthError? error;
   @override
   AuthState clone() {
     return AuthState()

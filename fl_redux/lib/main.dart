@@ -13,14 +13,14 @@ import 'business/redux/reducer.dart';
 import 'business/redux/states/app_state.dart';
 
 void main() {
-  final appSevice = Injector.instance.appService;
+  final appService = Injector.instance.appService;
   final store = Store<AppState>(appReducer,
       initialState: AppState.initial(),
       middleware: [
-        AuthMiddleware(appSevice),
-        StoreMiddleware(appSevice),
-        CartMiddleware(appSevice),
-        OrdersMiddleware(appSevice),
+        AuthMiddleware(appService),
+        StoreMiddleware(appService),
+        CartMiddleware(appService),
+        OrdersMiddleware(appService),
       ]);
   runApp(MyApp(
     store: store,
@@ -31,7 +31,6 @@ class MyApp extends StatelessWidget {
   final Store<AppState> store;
   const MyApp({super.key, required this.store});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(
@@ -42,7 +41,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: MainScreen(),
+        home: const MainScreen(),
       ),
     );
   }

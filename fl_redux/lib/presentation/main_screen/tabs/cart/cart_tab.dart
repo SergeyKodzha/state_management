@@ -15,7 +15,7 @@ import 'widgets/cart_item_product.dart';
 class CartTab extends StatelessWidget {
   final VoidCallback onAuth;
   final VoidCallback onOrder;
-  CartTab({Key? key, required this.onAuth, required this.onOrder}) : super(key: key);
+  const CartTab({Key? key, required this.onAuth, required this.onOrder}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +37,12 @@ class CartTab extends StatelessWidget {
                   final item = cart.items[index];
                   return CartItemProduct(
                       onQuantityChanged: (newVal) {
-                        final newItem = CartItem(item.productId, newVal);
-                        store.dispatch(UpdateCartItemAction(newItem));
+                        if (newVal>0) {
+                          final newItem = CartItem(item.productId, newVal);
+                          store.dispatch(UpdateCartItemAction(newItem));
+                        } else {
+                          store.dispatch(DeleteCartItemAction(item.productId));
+                        }
                       },
                       onRemove: () {
                         store.dispatch(DeleteCartItemAction(item.productId));

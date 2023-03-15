@@ -41,8 +41,6 @@ class AppService{
   }
 
   Future<Cart> setCartItem(CartItem item) async {
-    print('set cart item');
-    //await Future.delayed(Duration(seconds: 5));
     final cart=await fetchCart();
     final updated=cart.setItem(item);
     await _setCart(updated);
@@ -50,7 +48,6 @@ class AppService{
   }
 
   Future<Cart> removeCartItem(ProductID id) async {
-    print('remove cart item');
     final cart=await fetchCart();
     final updated=cart.removeItemById(id);
     await _setCart(updated);

@@ -23,7 +23,6 @@ void _login(Action action, Context<AuthState> context) async {
     final user = await service.login(data['name'], data['pass']);
     context.dispatch(AuthActions.leave(user));
   } on ErrorResponse catch(e){
-    //context.dispatch(AuthActions.error(AuthError(e.message)));
     context.dispatch(AuthActions.error(e.message));
   }
 }

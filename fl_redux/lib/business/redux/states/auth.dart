@@ -1,7 +1,7 @@
 import '../../../../common/auth_error.dart';
 import '../../entities/user.dart';
 
-///auth model
+//auth model
 enum AuthState{noAuth,inProgress,error,authed}
 class AuthData{
   final AuthState state;

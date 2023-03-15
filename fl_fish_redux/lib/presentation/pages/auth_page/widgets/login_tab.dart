@@ -59,7 +59,6 @@ class LoginTab extends StatelessWidget {
                         valueListenable: btnEnabled,
                         builder: (context, enabled, child) => ElevatedButton(
                               onPressed: !enabled ? null : ()=>onLogin?.call(_nameController.text,_passController.text),
-                              //onPressed: !enabled ? null : () {},
                               child: const Text("авторизоваться"),
                             )),
                   ],

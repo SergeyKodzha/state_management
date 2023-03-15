@@ -17,24 +17,24 @@ class StoreTab extends StatelessWidget {
       converter: (store) =>store.state.storeData.products,
       builder: (context, products) => GridView.builder(
           itemCount: products.length,
+          //shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            childAspectRatio: 40 / 56,
+            mainAxisSpacing: 0,
+            childAspectRatio: 40 / 53,
           ),
           itemBuilder: (context, index) {
             return StoreItem(
-              product: products[index],
-              onTap: (product) {
-                //print('tap');
-                _navigateToDetailsScreen(context, product);
-              },
+            product: products[index],
+            onTap: (product) {
+              _navigateToDetailsScreen(context, product);
+            },
             );
           }),
     );
   }
 
   Future<void> _navigateToDetailsScreen(BuildContext context, Product product) async {
-    final store=StoreProvider.of<AppState>(context,listen: false);
     await Navigator.push(
         context,
         MaterialPageRoute(

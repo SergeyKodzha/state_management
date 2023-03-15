@@ -16,7 +16,6 @@ class MainState implements Cloneable<MainState> {
   @override
   MainState clone() {
     return MainState()
-      //..currentTab = currentTab
       ..tabController = tabController
       ..storeState = storeState
       ..cartState = cartState

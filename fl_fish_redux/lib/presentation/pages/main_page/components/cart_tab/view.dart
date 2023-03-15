@@ -30,8 +30,12 @@ Widget buildView(CartState state, Dispatch dispatch, ViewService viewService) {
             final item = cart.items[index];
             return CartItemProduct(
                 onQuantityChanged: (newVal) {
-                  final newItem = CartItem(item.productId, newVal);
-                  dispatch(CartActions.setItem(newItem));
+                  if (newVal>0) {
+                    final newItem = CartItem(item.productId, newVal);
+                    dispatch(CartActions.setItem(newItem));
+                  } else {
+                    dispatch(CartActions.removeItem(item.productId));
+                  }
                 },
                 onRemove: () {
                   if (product!=null) {
@@ -52,15 +56,6 @@ Widget buildView(CartState state, Dispatch dispatch, ViewService viewService) {
                 enabled: enabled,
                 onBuy: () {
                   dispatch(MainPageActions.order());
-                  /*
-                  final auth = context.read<AuthBloc>().state;
-                  if (auth.status != AuthStatus.loggedIn) {
-                    _onAuth.call();
-                  } else {
-                    context.read<OrderBloc>().add(OrderDoOrder());
-                    _onOrder();
-                  }
-                   */
                 },
                 totalPrice: '$price руб');
           }

@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 class OrderItem extends StatelessWidget {
   final Order order;
 
-  const OrderItem(this.order);
+  const OrderItem(this.order, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,17 +40,15 @@ class OrderItem extends StatelessWidget {
               ],
             ),
             Row(
-              //mainAxisAlignment: MainAxisAlignment.center,
               children: [
                Padding(
                  padding: const EdgeInsets.only(left: 8.0),
                  child: _icon(),
                ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Column(
-                  //mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
@@ -93,7 +91,6 @@ class OrderItem extends StatelessWidget {
     if (timeLast<=0){
       return 'Доставлено';
     } else {
-      print('delivery in $timeLast');
       if (timeLast>60*1000){
         return 'Доставка через ${timeLast.toDouble()/1000~/60} минут';
       } else {

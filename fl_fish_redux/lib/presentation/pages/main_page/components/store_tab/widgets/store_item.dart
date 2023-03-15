@@ -1,8 +1,6 @@
 import 'package:fl_fish_redux/business/entities/product.dart';
 import 'package:flutter/material.dart';
 
-
-
 class StoreItem extends StatelessWidget {
   final Product product;
   final void Function(Product)? onTap;

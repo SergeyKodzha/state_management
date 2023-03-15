@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../common/widgets/loading_tab.dart';
-
 class RegisterTab extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
@@ -73,7 +71,6 @@ class RegisterTab extends StatelessWidget {
                         valueListenable: btnEnabled,
                         builder: (context, enabled, child) => ElevatedButton(
                           onPressed: !enabled ? null : ()=>onRegister?.call(_nameController.text,_passController.text),
-                          //onPressed: !enabled ? null : () {},
                           child: const Text("Зарегестрироваться"),
                         )),
                   ],

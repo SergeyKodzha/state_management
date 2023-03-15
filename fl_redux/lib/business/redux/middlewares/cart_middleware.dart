@@ -14,13 +14,11 @@ class CartMiddleware extends MiddlewareClass<AppState>{
   call(Store<AppState> store, action, NextDispatcher next) async {
     if (action is FetchCartDataAction){
       store.dispatch(CartLoadingAction());
-      print('fetching cart auth:${store.state.authData.state}');
       final cart=await _service.fetchCart();
       final List<ProductID> ids=[];
       for (final item in cart.items){
         ids.add(item.productId);
       }
-      print('fetching ids:$ids');
       final products=await _service.fetchCartProducts(ids);
       store.dispatch(CartLoadedAction(cart:cart,products:products));
     } else if (action is UpdateCartItemAction){

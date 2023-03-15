@@ -8,6 +8,8 @@ import '../../../../business/redux/states/orders.dart';
 import '../../../../common/widgets/loading_tab.dart';
 
 class OrdersTab extends StatefulWidget {
+  const OrdersTab({super.key});
+
   @override
   State<StatefulWidget> createState()=>_OrdersState();
 

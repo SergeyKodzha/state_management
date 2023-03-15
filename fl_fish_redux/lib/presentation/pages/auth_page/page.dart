@@ -10,14 +10,6 @@ class AuthPage extends Page<AuthState,void>{
       initState: (_)=>AuthState(),
       reducer: buildReducer(),
       effect: buildEffect(),
-      /*
-      reducer: buildStorePageReducer(),
-      dependencies: Dependencies(
-        slots: {
-          'list':StoreListConnector()+StoreListComponent()
-        },
-      ),
-       */
       view:buildPage,
   );
 }

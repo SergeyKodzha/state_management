@@ -92,7 +92,6 @@ class DetailsScreen extends StatelessWidget {
                               height: 16,
                             ),
                             Row(
-                              //mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 const Text(
@@ -104,7 +103,6 @@ class DetailsScreen extends StatelessWidget {
                                       children: [
                                         LayoutBuilder(
                                           builder: (_, __) {
-                                            //final item=cart.items.firstWhereOrNull((i) => i.productId==this.item.productId);
                                             final enabled = cartData.state ==
                                                 CartState.idle;
                                             return QuantityWidget(

@@ -16,9 +16,9 @@ Widget buildView(
           )
         : _content(state, dispatch);
     if (!loading) {
-      if (state.scrollController?.hasClients==true) {
-        state.scrollController?.animateTo(
-          state.scrollController?.position.maxScrollExtent??0,
+      if (state.scrollController.hasClients==true) {
+        state.scrollController.animateTo(
+          state.scrollController.position.maxScrollExtent,
           duration: const Duration(seconds: 1),
           curve: Curves.fastOutSlowIn,
         );

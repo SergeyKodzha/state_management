@@ -11,23 +11,19 @@ import '../products_hardcode.dart';
 
 class MockLocalRepository implements LocalRepository {
   Future<SharedPreferences> get _sPrefs async => await SharedPreferences.getInstance();
-  MockLocalRepository(){
-    //SharedPreferences.getInstance().then((sPrefs) => sPrefs.clear());
-  }
+  MockLocalRepository();
   @override
   Future<Cart> fetchCart() async {
-    //await Future.delayed(const Duration(seconds: 3));
     final Map<String,Cart> carts=await _getCartsFromSPrefs();
-    return carts['guest']?? Cart([]);
+    return carts['guest']?? Cart(const []);
   }
 
   @override
   Future<Map<ProductID,Product>> fetchCartProducts(List<ProductID>? ids) async {
     await Future.delayed(const Duration(seconds: 1));
     final Map<ProductID,Product> res={};
-    for (final json in hardcode_products){
+    for (final json in hardcodeProducts){
       if (ids==null || ids.contains(json['id'])) {
-        //res.add(Product.fromJson(json));
         res[json['id']]=Product.fromJson(json);
       }
     }
@@ -38,7 +34,7 @@ class MockLocalRepository implements LocalRepository {
   Future<List<Product>> fetchAllProducts() async {
     await Future.delayed(const Duration(seconds: 1));
     final List<Product> res=[];
-    for (final json in hardcode_products){
+    for (final json in hardcodeProducts){
         res.add(Product.fromJson(json));
     }
     return res;
@@ -46,7 +42,6 @@ class MockLocalRepository implements LocalRepository {
 
   @override
   Future<void> setCart(Cart cart) async {
-    //await Future.delayed(const Duration(seconds: 10));
     final Map<String,Cart> carts=await _getCartsFromSPrefs();
     carts['guest']=cart;
     _saveCartsToSPrefs(carts);
@@ -71,7 +66,6 @@ class MockLocalRepository implements LocalRepository {
     for (final uid in carts.keys){
       final entry={'uid':uid,'cart':carts[uid]};
       final str=jsonEncode(entry);
-      print('cart entry: $str');
       toSave.add(str);
     }
     sPrefs.setStringList('cached_carts', toSave);

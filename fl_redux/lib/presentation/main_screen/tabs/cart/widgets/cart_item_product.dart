@@ -34,7 +34,6 @@ class CartItemProduct extends StatelessWidget {
               'assets/images/${product.image}',
               fit: BoxFit.fitHeight,
             )),
-        //SizedBox(width: 16,),
         Expanded(
           flex: 2,
           child: Padding(

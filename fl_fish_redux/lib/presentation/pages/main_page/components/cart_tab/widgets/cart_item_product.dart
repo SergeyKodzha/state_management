@@ -3,10 +3,6 @@ import 'package:fl_fish_redux/business/entities/product.dart';
 import 'package:fl_fish_redux/common/widgets/quantity_widget.dart';
 import 'package:flutter/material.dart';
 
-
-
-
-
 class CartItemProduct extends StatelessWidget {
   final Product? product;
   final CartItem item;
@@ -35,7 +31,6 @@ class CartItemProduct extends StatelessWidget {
               'assets/images/${product.image}',
               fit: BoxFit.fitHeight,
             )),
-        //SizedBox(width: 16,),
         Expanded(
           flex: 2,
           child: Padding(
